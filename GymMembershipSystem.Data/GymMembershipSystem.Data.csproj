@@ -10,7 +10,6 @@
     <Folder Include="Common\" />
     <Folder Include="Configuration\" />
     <Folder Include="Migrations\" />
-    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>
