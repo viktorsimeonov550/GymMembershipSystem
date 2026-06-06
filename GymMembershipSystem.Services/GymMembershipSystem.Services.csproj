@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GymMembershipSystem.Data\GymMembershipSystem.Data.csproj" />
+  </ItemGroup>
+
 </Project>

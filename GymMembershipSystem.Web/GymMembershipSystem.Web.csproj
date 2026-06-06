@@ -14,4 +14,9 @@
     <Folder Include="Areas\Admin\Views\Trainers\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GymMembershipSystem.Data\GymMembershipSystem.Data.csproj" />
+    <ProjectReference Include="..\GymMembershipSystem.Services\GymMembershipSystem.Services.csproj" />
+  </ItemGroup>
+
 </Project>
