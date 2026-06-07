@@ -9,6 +9,7 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Views\Dashboard\" />
     <Folder Include="Areas\Admin\Views\GymLocations\" />
+    <Folder Include="Areas\Admin\Views\MembershipPlans\" />
     <Folder Include="Areas\Admin\Views\WorkoutClasses\" />
     <Folder Include="Areas\Admin\Views\Trainers\" />
   </ItemGroup>
