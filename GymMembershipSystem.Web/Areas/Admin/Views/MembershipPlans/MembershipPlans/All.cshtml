@@ -1,3 +1,0 @@
-@model IEnumerable<MembershipPlanViewModel>
-<h1>Manage Plans</h1><a class="btn" asp-action="Add">Add</a>
-<table><tr><th>Name</th><th>Price</th><th></th></tr>@foreach (var item in Model){<tr><td>@item.Name</td><td>@item.Price</td><td><a asp-action="Edit" asp-route-id="@item.Id">Edit</a><form asp-action="Delete" asp-route-id="@item.Id" method="post"><button>Delete</button></form></td></tr>}</table>
