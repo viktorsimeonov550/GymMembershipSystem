@@ -1,0 +1,3 @@
+@model IEnumerable<TrainerViewModel>
+<h1>Manage Trainers</h1><a class="btn" asp-action="Add">Add</a>
+<table><tr><th>Name</th><th>Specialization</th><th></th></tr>@foreach (var item in Model){<tr><td>@item.FullName</td><td>@item.Specialization</td><td><a asp-action="Edit" asp-route-id="@item.Id">Edit</a><form asp-action="Delete" asp-route-id="@item.Id" method="post"><button>Delete</button></form></td></tr>}</table>

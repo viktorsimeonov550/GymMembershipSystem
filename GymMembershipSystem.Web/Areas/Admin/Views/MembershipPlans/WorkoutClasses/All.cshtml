@@ -1,0 +1,3 @@
+@model IEnumerable<WorkoutClassViewModel>
+<h1>Manage Workouts</h1><a class="btn" asp-action="Add">Add</a>
+<table><tr><th>Title</th><th>Start</th><th>Trainer</th><th></th></tr>@foreach (var item in Model){<tr><td>@item.Title</td><td>@item.StartTime.ToString("dd.MM.yyyy HH:mm")</td><td>@item.TrainerName</td><td><a asp-action="Edit" asp-route-id="@item.Id">Edit</a><form asp-action="Delete" asp-route-id="@item.Id" method="post"><button>Delete</button></form></td></tr>}</table>
