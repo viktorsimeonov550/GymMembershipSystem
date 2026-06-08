@@ -12,6 +12,8 @@
     <Folder Include="Areas\Admin\Views\MembershipPlans\" />
     <Folder Include="Areas\Admin\Views\WorkoutClasses\" />
     <Folder Include="Areas\Admin\Views\Trainers\" />
+    <Folder Include="Controllers\Api\" />
+    <Folder Include="Infrastrucutre\" />
   </ItemGroup>
 
   <ItemGroup>
