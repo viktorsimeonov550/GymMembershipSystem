@@ -1,0 +1,29 @@
+@model IEnumerable<TrainerViewModel>
+@{
+    ViewData["Title"] = "Trainers";
+}
+
+<section class="section">
+    <span class="badge">Coaching team</span>
+    <h1 class="page-title">Professional Trainers</h1>
+    <p class="page-subtitle">Members can choose workouts led by trainers with different specializations: strength, yoga, boxing and conditioning.</p>
+</section>
+
+<div class="grid grid-3 cards section">
+@foreach (var trainer in Model)
+{
+    <article class="card">
+        <div class="visual trainer" data-label="@trainer.Specialization"></div>
+        <h2>@trainer.FullName</h2>
+        <p>@trainer.Specialization</p>
+        <div class="chips">
+            <span class="chip">@trainer.ExperienceYears years experience</span>
+            <span class="chip">Personal guidance</span>
+        </div>
+        <p>@trainer.Biography</p>
+        <div class="card-actions">
+            <a class="btn btn-secondary btn-small" asp-action="Details" asp-route-id="@trainer.Id">Details</a>
+        </div>
+    </article>
+}
+</div>

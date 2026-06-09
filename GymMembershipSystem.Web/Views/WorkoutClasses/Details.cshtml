@@ -1,0 +1,30 @@
+@model WorkoutClassViewModel
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<section class="hero" style="min-height:auto">
+    <div class="hero-copy">
+        <span class="badge">Workout class</span>
+        <h1>@Model.Title</h1>
+        <p>@Model.Description</p>
+        <div class="chips">
+            <span class="chip">Trainer: @Model.TrainerName</span>
+            <span class="chip">Location: @Model.LocationName</span>
+            <span class="chip">@Model.StartTime.ToString("dd.MM.yyyy HH:mm")</span>
+            <span class="chip">@Model.BookedPlaces / @Model.Capacity booked</span>
+        </div>
+        <div class="hero-actions">
+            <form asp-controller="Bookings" asp-action="Book" asp-route-id="@Model.Id" method="post">
+                <button class="btn" type="submit">Book class</button>
+            </form>
+            <a class="btn btn-secondary" asp-action="All">Back to workouts</a>
+        </div>
+    </div>
+    <aside class="hero-panel">
+        <div class="panel-head"><strong>Class experience</strong><span class="badge">Member access</span></div>
+        <div class="benefit-row"><span class="benefit-icon">C</span><div><strong>Coach-led training</strong><br /><span>Organized session with clear structure.</span></div></div>
+        <div class="benefit-row"><span class="benefit-icon">Z</span><div><strong>Specialized zone</strong><br /><span>Cardio, boxing, strength or recovery area.</span></div></div>
+        <div class="benefit-row"><span class="benefit-icon">B</span><div><strong>Membership booking</strong><br /><span>Only active members can reserve places.</span></div></div>
+    </aside>
+</section>

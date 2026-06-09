@@ -1,0 +1,19 @@
+@model TrainerViewModel
+@{
+    ViewData["Title"] = Model.FullName;
+}
+
+<section class="content-panel section">
+    <span class="badge">Trainer profile</span>
+    <h1 class="page-title">@Model.FullName</h1>
+    <p class="page-subtitle">@Model.Biography</p>
+    <div class="feature-list">
+        <div class="feature-item"><strong>Specialization</strong><span>@Model.Specialization</span></div>
+        <div class="feature-item"><strong>Experience</strong><span>@Model.ExperienceYears years</span></div>
+        <div class="feature-item"><strong>Best for</strong><span>Members who want structured, consistent progress.</span></div>
+    </div>
+    <div class="hero-actions">
+        <a class="btn" asp-controller="WorkoutClasses" asp-action="All">See workout classes</a>
+        <a class="btn btn-secondary" asp-action="All">Back to trainers</a>
+    </div>
+</section>

@@ -1,0 +1,37 @@
+@model IEnumerable<WorkoutClassViewModel>
+@{
+    ViewData["Title"] = "Workout Classes";
+}
+
+<section class="section">
+    <span class="badge">Book your session</span>
+    <h1 class="page-title">Workout Classes</h1>
+    <p class="page-subtitle">Search available classes and book a spot using your active membership.</p>
+    <form method="get" class="search">
+        <input name="searchTerm" value="@ViewBag.SearchTerm" placeholder="Search boxing, yoga, cardio, strength..." />
+        <button class="btn" type="submit">Search</button>
+    </form>
+</section>
+
+<div class="grid grid-3 cards section">
+@foreach (var workout in Model)
+{
+    <article class="card">
+        <div class="visual workout" data-label="@workout.Title"></div>
+        <h2>@workout.Title</h2>
+        <p>@workout.Description</p>
+        <div class="chips">
+            <span class="chip">@workout.StartTime.ToString("dd.MM.yyyy HH:mm")</span>
+            <span class="chip">@workout.DurationMinutes min</span>
+            <span class="chip">@workout.BookedPlaces / @workout.Capacity places</span>
+        </div>
+        <p><strong>Trainer:</strong> @workout.TrainerName<br /><strong>Location:</strong> @workout.LocationName</p>
+        <div class="card-actions">
+            <a class="btn btn-secondary btn-small" asp-action="Details" asp-route-id="@workout.Id">Details</a>
+            <form asp-controller="Bookings" asp-action="Book" asp-route-id="@workout.Id" method="post">
+                <button class="btn btn-small" type="submit">Book</button>
+            </form>
+        </div>
+    </article>
+}
+</div>

@@ -15,6 +15,7 @@
     <Folder Include="Controllers\Api\" />
     <Folder Include="Infrastrucutre\" />
     <Folder Include="Models\Account\" />
+    <Folder Include="Views\" />
   </ItemGroup>
 
   <ItemGroup>
