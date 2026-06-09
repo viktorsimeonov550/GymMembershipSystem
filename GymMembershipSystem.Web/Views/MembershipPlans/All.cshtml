@@ -1,0 +1,45 @@
+@model IEnumerable<MembershipPlanViewModel>
+@{
+    ViewData["Title"] = "Membership Plans";
+}
+
+<section class="section">
+    <span class="badge">Choose your access</span>
+    <h1 class="page-title">Membership Plans</h1>
+    <p class="page-subtitle">Pick the plan that matches your training style. Each membership is presented as a complete club experience, not just access to equipment.</p>
+</section>
+
+<div class="grid grid-3 cards section">
+@foreach (var plan in Model)
+{
+    var planClass = plan.Name.ToLower().Contains("premium") ? "plan-premium" : plan.Name.ToLower().Contains("standard") ? "plan-standard" : "plan-basic";
+    <article class="card">
+        <div class="visual @planClass" data-label="@plan.Name"></div>
+        <h2>@plan.Name</h2>
+        <p>@plan.Description</p>
+        <div class="price">@plan.Price лв. <span>/ @plan.DurationInDays days</span></div>
+        <div class="chips">
+            <span class="chip">Unlimited gym access</span>
+            <span class="chip">Lockers</span>
+            <span class="chip">Wi-Fi</span>
+            @if (!plan.Name.Equals("Basic", StringComparison.OrdinalIgnoreCase))
+            {
+                <span class="chip">Group classes</span>
+                <span class="chip">Boxing area</span>
+            }
+            @if (plan.Name.Equals("Premium", StringComparison.OrdinalIgnoreCase))
+            {
+                <span class="chip">MMA cage</span>
+                <span class="chip">Sauna</span>
+                <span class="chip">Free parking</span>
+            }
+        </div>
+        <div class="card-actions">
+            <a class="btn btn-secondary btn-small" asp-action="Details" asp-route-id="@plan.Id">Details</a>
+            <form asp-action="Subscribe" asp-route-id="@plan.Id" method="post">
+                <button class="btn btn-small" type="submit">Subscribe</button>
+            </form>
+        </div>
+    </article>
+}
+</div>

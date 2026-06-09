@@ -1,0 +1,36 @@
+@model MyMembershipViewModel
+@{
+    ViewData["Title"] = "My Membership";
+}
+
+<section class="hero" style="min-height:auto">
+    <div class="hero-copy">
+        <span class="badge">Membership status</span>
+        <h1>My Membership</h1>
+        @if (!Model.IsActive)
+        {
+            <p>You do not have an active membership yet. Choose a plan to unlock bookings, trainers and premium gym benefits.</p>
+            <div class="hero-actions">
+                <a class="btn" asp-controller="MembershipPlans" asp-action="All">Choose Plan</a>
+            </div>
+        }
+        else
+        {
+            <p>Your current plan is active. Use it to book classes and manage your training schedule.</p>
+            <div class="chips">
+                <span class="chip">Plan: @Model.PlanName</span>
+                <span class="chip">Start: @Model.StartDate?.ToString("dd.MM.yyyy")</span>
+                <span class="chip">End: @Model.EndDate?.ToString("dd.MM.yyyy")</span>
+            </div>
+            <div class="hero-actions">
+                <a class="btn" asp-controller="WorkoutClasses" asp-action="All">Book workout</a>
+            </div>
+        }
+    </div>
+    <aside class="hero-panel">
+        <div class="panel-head"><strong>Member perks</strong><span class="badge">Included</span></div>
+        <div class="benefit-row"><span class="benefit-icon">W</span><div><strong>Workout bookings</strong><br /><span>Reserve classes with one click.</span></div></div>
+        <div class="benefit-row"><span class="benefit-icon">T</span><div><strong>Trainer access</strong><br /><span>Train with specialized instructors.</span></div></div>
+        <div class="benefit-row"><span class="benefit-icon">F</span><div><strong>Facility benefits</strong><br /><span>Lockers, Wi-Fi, selected parking and recovery zones.</span></div></div>
+    </aside>
+</section>

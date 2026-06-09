@@ -1,0 +1,37 @@
+@model IEnumerable<BookingViewModel>
+@{
+    ViewData["Title"] = "My Bookings";
+}
+
+<section class="section">
+    <span class="badge">Personal schedule</span>
+    <h1 class="page-title">My Bookings</h1>
+    <p class="page-subtitle">Track your reserved workout classes and cancel sessions when needed.</p>
+</section>
+
+<table class="section">
+    <tr>
+        <th>Workout</th>
+        <th>Trainer</th>
+        <th>Start</th>
+        <th>Status</th>
+        <th></th>
+    </tr>
+@foreach (var booking in Model)
+{
+    <tr>
+        <td>@booking.WorkoutTitle</td>
+        <td>@booking.TrainerName</td>
+        <td>@booking.StartTime.ToString("dd.MM.yyyy HH:mm")</td>
+        <td>@(booking.IsCancelled ? "Cancelled" : "Active")</td>
+        <td>
+            @if (!booking.IsCancelled)
+            {
+                <form asp-action="Cancel" asp-route-id="@booking.Id" method="post">
+                    <button class="btn btn-secondary btn-small" type="submit">Cancel</button>
+                </form>
+            }
+        </td>
+    </tr>
+}
+</table>

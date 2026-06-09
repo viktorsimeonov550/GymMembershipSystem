@@ -1,8 +1,62 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+@model DashboardStatisticsViewModel
+@{
+    ViewData["Title"] = "Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="hero">
+    <div class="hero-copy">
+        <span class="badge">Membership-first gym platform</span>
+        <h1>Train harder. Manage your membership easier.</h1>
+        <p>
+            Choose a plan, unlock premium gym benefits and book workout classes with professional trainers.
+            The system focuses on memberships, but the offer feels like a real modern fitness club.
+        </p>
+        <div class="hero-actions">
+            <a class="btn" asp-controller="MembershipPlans" asp-action="All">View Memberships</a>
+            <a class="btn btn-secondary" asp-controller="WorkoutClasses" asp-action="All">Browse Workouts</a>
+        </div>
+    </div>
+
+    <aside class="hero-panel">
+        <div class="panel-head">
+            <strong>Premium Membership</strong>
+            <span class="badge">Most popular</span>
+        </div>
+        <p class="page-subtitle" style="font-size:1rem;margin-top:0">Full gym access, group classes and club benefits included.</p>
+        <div class="progress-track"><div class="progress-fill"></div></div>
+        <div class="benefit-row"><span class="benefit-icon">P</span><div><strong>Free parking</strong><br /><span>Available on selected locations</span></div></div>
+        <div class="benefit-row"><span class="benefit-icon">M</span><div><strong>MMA cage & boxing area</strong><br /><span>Combat training zones for members</span></div></div>
+        <div class="benefit-row"><span class="benefit-icon">S</span><div><strong>Sauna, lockers, Wi-Fi</strong><br /><span>Comfort benefits after every workout</span></div></div>
+    </aside>
+</section>
+
+<section class="grid stats" id="stats-box">
+    <div><strong>@Model.TotalPlans</strong><span>Membership plans</span></div>
+    <div><strong>@Model.TotalTrainers</strong><span>Professional trainers</span></div>
+    <div><strong>@Model.TotalWorkoutClasses</strong><span>Workout classes</span></div>
+    <div><strong>@Model.ActiveMemberships</strong><span>Active memberships</span></div>
+</section>
+
+<section class="section">
+    <div class="section-head">
+        <div>
+            <span class="badge">What members get</span>
+            <h2>Benefits that make the membership easier to sell</h2>
+        </div>
+        <a class="btn btn-secondary" asp-controller="MembershipPlans" asp-action="All">Compare plans</a>
+    </div>
+    <div class="feature-list">
+        <div class="feature-item"><strong>Professional equipment</strong><span>Modern strength machines, free weights and cardio zones.</span></div>
+        <div class="feature-item"><strong>Group activities</strong><span>Yoga, HIIT, boxing, cardio and strength classes.</span></div>
+        <div class="feature-item"><strong>MMA cage</strong><span>Dedicated combat zone for martial arts sessions.</span></div>
+        <div class="feature-item"><strong>Boxing area</strong><span>Technique drills, conditioning and beginner-friendly classes.</span></div>
+        <div class="feature-item"><strong>Crossfit area</strong><span>Functional training space for high intensity workouts.</span></div>
+        <div class="feature-item"><strong>Protein & fresh bar</strong><span>Post-workout recovery options inside the club.</span></div>
+        <div class="feature-item"><strong>Sauna</strong><span>Recovery-focused comfort for premium members.</span></div>
+        <div class="feature-item"><strong>Free parking</strong><span>Convenient access for selected gym locations.</span></div>
+    </div>
+</section>
+
+@section Scripts {
+    <script src="~/js/statistics.js"></script>
+}

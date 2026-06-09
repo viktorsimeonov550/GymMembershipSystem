@@ -1,0 +1,25 @@
+@model MembershipPlanViewModel
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<section class="hero" style="min-height:auto">
+    <div class="hero-copy">
+        <span class="badge">Membership details</span>
+        <h1>@Model.Name plan</h1>
+        <p>@Model.Description</p>
+        <div class="price">@Model.Price лв. <span>/ @Model.DurationInDays days</span></div>
+        <div class="hero-actions">
+            <form asp-action="Subscribe" asp-route-id="@Model.Id" method="post">
+                <button class="btn" type="submit">Subscribe now</button>
+            </form>
+            <a class="btn btn-secondary" asp-action="All">Back to plans</a>
+        </div>
+    </div>
+    <aside class="hero-panel">
+        <div class="panel-head"><strong>Included benefits</strong><span class="badge">Active plan</span></div>
+        <div class="benefit-row"><span class="benefit-icon">24</span><div><strong>Flexible access</strong><br /><span>Use the gym during working hours.</span></div></div>
+        <div class="benefit-row"><span class="benefit-icon">G</span><div><strong>Group workouts</strong><br /><span>Available on Standard and Premium plans.</span></div></div>
+        <div class="benefit-row"><span class="benefit-icon">R</span><div><strong>Recovery benefits</strong><br /><span>Sauna, lockers, showers and Wi-Fi.</span></div></div>
+    </aside>
+</section>
