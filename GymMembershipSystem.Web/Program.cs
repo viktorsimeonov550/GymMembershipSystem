@@ -1,36 +1,83 @@
-namespace GymMembershipSystem.Web
+using GymMembershipSystem.Data;
+using GymMembershipSystem.Data.Models;
+using GymMembershipSystem.Services.Contracts;
+using GymMembershipSystem.Services.Implementations;
+using GymMembershipSystem.Web.Infrastructure;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
+
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection")
+    ?? throw new InvalidOperationException("Connection string 'DefaultConnection' was not found.");
+
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    options.UseSqlServer(connectionString));
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            var builder = WebApplication.CreateBuilder(args);
+    options.SignIn.RequireConfirmedAccount = false;
+    options.Password.RequireDigit = false;
+    options.Password.RequireLowercase = false;
+    options.Password.RequireUppercase = false;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequiredLength = 6;
+})
+.AddRoles<IdentityRole>()
+.AddEntityFrameworkStores<ApplicationDbContext>();
 
-            // Add services to the container.
-            builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
 
-            var app = builder.Build();
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = "/Account/Login";
+    options.AccessDeniedPath = "/Error/Unauthorized401";
+});
 
-            // Configure the HTTP request pipeline.
-            if (!app.Environment.IsDevelopment())
-            {
-                app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
 
-            app.UseHttpsRedirection();
-            app.UseStaticFiles();
+builder.Services.AddScoped<IMembershipPlanService, MembershipPlanService>();
+builder.Services.AddScoped<ITrainerService, TrainerService>();
+builder.Services.AddScoped<IWorkoutClassService, WorkoutClassService>();
+builder.Services.AddScoped<IBookingService, BookingService>();
+builder.Services.AddScoped<IUserMembershipService, UserMembershipService>();
+builder.Services.AddScoped<IGymLocationService, GymLocationService>();
+builder.Services.AddScoped<IStatisticsService, StatisticsService>();
 
-            app.UseRouting();
+var app = builder.Build();
 
-            app.UseAuthorization();
-
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
-
-            app.Run();
-        }
-    }
+using (var scope = app.Services.CreateScope())
+{
+    await ApplicationSeeder.SeedAsync(scope.ServiceProvider);
 }
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseMigrationsEndPoint();
+}
+else
+{
+    app.UseExceptionHandler("/Error/InternalServerError500");
+    app.UseHsts();
+}
+
+app.UseStatusCodePagesWithReExecute("/Error/Handle", "?code={0}");
+
+app.UseStaticFiles();
+app.UseRouting();
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "areas",
+    pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapRazorPages();
+
+app.Run();
