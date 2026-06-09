@@ -14,6 +14,7 @@
     <Folder Include="Areas\Admin\Views\Trainers\" />
     <Folder Include="Controllers\Api\" />
     <Folder Include="Infrastrucutre\" />
+    <Folder Include="Models\Account\" />
   </ItemGroup>
 
   <ItemGroup>
