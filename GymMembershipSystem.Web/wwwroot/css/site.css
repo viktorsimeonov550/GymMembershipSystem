@@ -495,32 +495,67 @@ p {
 /* ---------- Decorative visuals ---------- */
 .visual {
     position: relative;
-    height: 150px;
+    height: 170px;
     border-radius: var(--radius-sm);
     margin-bottom: 1rem;
     overflow: hidden;
     background: linear-gradient(135deg, #2a3140, #161a24);
-    display: flex;
-    align-items: flex-end;
-    padding: 0.85rem;
+}
+
+.visual img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* dark scrim so the label stays readable over any photo */
+.visual::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 45%, rgba(0, 0, 0, 0.7) 100%);
 }
 
 .visual::after {
     content: attr(data-label);
+    position: absolute;
+    left: 0.85rem;
+    bottom: 0.7rem;
+    z-index: 2;
     font-size: 0.8rem;
     font-weight: 700;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.92);
-    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.5);
+    color: #fff;
+    text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
 }
 
+/* gradient fallbacks shown only if a photo fails to load */
 .visual.workout { background: linear-gradient(135deg, #ff7a45, #c2410c); }
 .visual.trainer { background: linear-gradient(135deg, #4f9dff, #1e3a8a); }
 .visual.plan-basic { background: linear-gradient(135deg, #64748b, #334155); }
 .visual.plan-standard { background: linear-gradient(135deg, #34d399, #047857); }
 .visual.plan-premium { background: linear-gradient(135deg, var(--accent), var(--accent-deep)); }
-.visual.plan-premium::after { color: var(--accent-ink); text-shadow: none; }
+
+/* ---------- Detail page media ---------- */
+.detail-banner {
+    height: 240px;
+    border-radius: var(--radius-sm);
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+    background: var(--surface-2);
+}
+
+.detail-banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
 
 /* ---------- Search ---------- */
 .search {

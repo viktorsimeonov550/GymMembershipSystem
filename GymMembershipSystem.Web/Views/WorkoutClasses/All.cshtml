@@ -17,7 +17,9 @@
 @foreach (var workout in Model)
 {
     <article class="card">
-        <div class="visual workout" data-label="@workout.Title"></div>
+        <div class="visual workout" data-label="@workout.Title">
+            <img src="@workout.ImageUrl" alt="@workout.Title" loading="lazy" />
+        </div>
         <h2>@workout.Title</h2>
         <p>@workout.Description</p>
         <div class="chips">

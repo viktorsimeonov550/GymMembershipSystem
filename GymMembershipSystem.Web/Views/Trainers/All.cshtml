@@ -13,7 +13,9 @@
 @foreach (var trainer in Model)
 {
     <article class="card">
-        <div class="visual trainer" data-label="@trainer.Specialization"></div>
+        <div class="visual trainer" data-label="@trainer.Specialization">
+            <img src="@trainer.ImageUrl" alt="@trainer.FullName" loading="lazy" />
+        </div>
         <h2>@trainer.FullName</h2>
         <p>@trainer.Specialization</p>
         <div class="chips">
