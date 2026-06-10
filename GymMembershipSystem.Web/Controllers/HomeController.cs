@@ -6,7 +6,14 @@ namespace GymMembershipSystem.Web.Controllers;
 public class HomeController : Controller
 {
     private readonly IStatisticsService statisticsService;
-    public HomeController(IStatisticsService statisticsService) => this.statisticsService = statisticsService;
+    private readonly IGymLocationService gymLocationService;
+
+    public HomeController(IStatisticsService statisticsService, IGymLocationService gymLocationService)
+    {
+        this.statisticsService = statisticsService;
+        this.gymLocationService = gymLocationService;
+    }
+
     public async Task<IActionResult> Index() => View(await statisticsService.GetDashboardStatisticsAsync());
-    public IActionResult About() => View();
+    public async Task<IActionResult> About() => View(await gymLocationService.AllAsync());
 }

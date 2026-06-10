@@ -14,7 +14,9 @@
 {
     var planClass = plan.Name.ToLower().Contains("premium") ? "plan-premium" : plan.Name.ToLower().Contains("standard") ? "plan-standard" : "plan-basic";
     <article class="card">
-        <div class="visual @planClass" data-label="@plan.Name"></div>
+        <div class="visual @planClass" data-label="@plan.Name">
+            <img src="@plan.ImageUrl" alt="@plan.Name" loading="lazy" />
+        </div>
         <h2>@plan.Name</h2>
         <p>@plan.Description</p>
         <div class="price">@plan.Price лв. <span>/ @plan.DurationInDays days</span></div>

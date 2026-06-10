@@ -1,3 +1,4 @@
+@model IEnumerable<GymLocationViewModel>
 @{
     ViewData["Title"] = "About";
 }
@@ -15,3 +16,30 @@
         <div class="feature-item"><strong>Services</strong><span>Business rules stay outside the controllers.</span></div>
     </div>
 </section>
+
+@if (Model.Any())
+{
+    <section class="section">
+        <div class="section-head">
+            <div>
+                <span class="badge">Where to train</span>
+                <h2>Our locations</h2>
+            </div>
+        </div>
+        <div class="grid grid-3 cards">
+        @foreach (var location in Model)
+        {
+            <article class="card">
+                <div class="visual" data-label="@location.City">
+                    <img src="@location.ImageUrl" alt="@location.Name" loading="lazy" />
+                </div>
+                <h2>@location.Name</h2>
+                <div class="chips">
+                    <span class="chip">@location.City</span>
+                </div>
+                <p>@location.Address</p>
+            </article>
+        }
+        </div>
+    </section>
+}
